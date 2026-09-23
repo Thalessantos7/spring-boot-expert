@@ -2,6 +2,8 @@
 
 Este repositório contém todos os códigos, anotações e projetos práticos desenvolvidos ao longo do curso **"Spring Boot Expert"**, ministrado por Dougllas Sousa. O objetivo deste repositório é documentar a minha jornada de profissionalização em Java e Spring Boot, abordando desde a criação de projetos do zero até o deploy na nuvem da AWS.
 
+[Link do Curso](https://www.udemy.com/course/spring-boot-expert/?couponCode=KEEPLEARNING)
+
 ## 📚 Sobre o Curso
 
 O curso é um guia completo focado no desenvolvimento e manutenção de projetos Spring Boot, independentemente do seu tamanho. Ele explora a fundo a arquitetura do ecossistema Spring, preparando o aluno para criar aplicações modernas, seguras e escaláveis prontas para o mercado de trabalho.
