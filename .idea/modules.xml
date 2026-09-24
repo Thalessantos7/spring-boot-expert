@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/curso-spring-boot-especialista.iml" filepath="$PROJECT_DIR$/.idea/curso-spring-boot-especialista.iml" />
+      <module fileurl="file://$PROJECT_DIR$/produtosapi/produtosapi.iml" filepath="$PROJECT_DIR$/produtosapi/produtosapi.iml" />
     </modules>
   </component>
 </project>

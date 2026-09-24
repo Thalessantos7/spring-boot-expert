@@ -1,11 +1,13 @@
-package backend.produtosapi;
+package io.github.Thalessantos7.arquiteturaspring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProdutosapiApplicationTests {
+class ApplicationTests {
+
 	@Test
 	void contextLoads() {
 	}
+
 }
