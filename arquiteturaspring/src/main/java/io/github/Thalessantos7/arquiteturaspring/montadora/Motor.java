@@ -5,7 +5,7 @@ public class Motor {
     private Integer cavalos;
     private Integer cilindros;
     private Double litragem;
-    private TipoMotor tipoMotor;
+    private TipoMotor tipo;
 
     public String getModelo() {
         return modelo;
@@ -39,12 +39,12 @@ public class Motor {
         this.litragem = litragem;
     }
 
-    public TipoMotor getTipoMotor() {
-        return tipoMotor;
+    public TipoMotor getTipo() {
+        return tipo;
     }
 
-    public void setTipoMotor(TipoMotor tipoMotor) {
-        this.tipoMotor = tipoMotor;
+    public void setTipo(TipoMotor tipoMotor) {
+        this.tipo = tipoMotor;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Motor {
                 ", cavalos=" + cavalos +
                 ", cilindros=" + cilindros +
                 ", litragem=" + litragem +
-                ", tipoMotor=" + tipoMotor +
+                ", tipo=" + tipo +
                 '}';
     }
 }
