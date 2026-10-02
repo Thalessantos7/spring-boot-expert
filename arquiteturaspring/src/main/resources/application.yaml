@@ -3,3 +3,10 @@ spring:
     name: arquiteturaspring
   jpa:
     show_sql: true
+  main:
+    lazy-initialization: false
+app:
+  montadora:
+    motor-padrao: 130
+  config:
+    variavel: valor da variavel X

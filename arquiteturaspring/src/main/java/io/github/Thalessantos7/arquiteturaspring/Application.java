@@ -16,6 +16,7 @@ public class Application {
 
 		builder.bannerMode(Banner.Mode.OFF);
 		builder.profiles("producao", "homologacao");
+//		builder.lazyInitialization(true);
 
 		builder.run(args);
 
@@ -23,9 +24,12 @@ public class Application {
 		ConfigurableApplicationContext applicationContext = builder.context();
 //		var produtoRepository = applicationContext.getBean("produtoRepository");
 
-
 		ConfigurableEnvironment environment = applicationContext.getEnvironment();
 		String applicationName = environment.getProperty("spring.application.name");
 		System.out.println("Nome da aplicação: " + applicationName);
+
+		ExemploValue value = applicationContext.getBean(ExemploValue.class);
+
+		value.imprimirVariavel();
 	}
 }
