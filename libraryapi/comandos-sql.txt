@@ -3,7 +3,7 @@ CREATE TABLE autor (
 	nome VARCHAR(100) NOT NULL,
 	data_nascimento DATE NOT NULL,
 	nacionalidade VARCHAR(50) NOT NULL
-)
+);
 
 CREATE TABLE livro (
 	id UUID NOT NULL PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE livro (
 	id_autor UUID NOT NULL REFERENCES autor(id),
 
 	CONSTRAINT chk_genero CHECK (genero IN ('FICCAO', 'FANTASIA', 'MISTERIO', 'ROMANCE', 'BIOGRAFIA', 'CIENCIA'))
-)
+);
 
-SELECT * FROM autor
-SELECT * FROM livro
+SELECT * FROM autor;
+SELECT * FROM livro;
