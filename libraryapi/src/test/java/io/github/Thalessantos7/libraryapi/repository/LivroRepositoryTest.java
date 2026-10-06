@@ -3,6 +3,7 @@ package io.github.Thalessantos7.libraryapi.repository;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.model.GeneroLivro;
 import io.github.Thalessantos7.libraryapi.model.Livro;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -105,5 +106,18 @@ class LivroRepositoryTest {
         UUID id = UUID.fromString("4024f5ee-7be7-4f14-b1c6-22478dea7f2b");
 
         repository.deleteById(id);
+    }
+
+    @Test
+    @Transactional
+    void buscarLivroTest() {
+        UUID id = UUID.fromString("6c05626b-1502-4eaf-98d9-948ecfd9d94b");
+        Livro livro = repository.findById(id).orElse(null);
+
+        System.out.println("Livro: ");
+        System.out.println(livro.getTitulo());
+
+        System.out.println("Autor: ");
+        System.out.println(livro.getAutor().getNome());
     }
 }
