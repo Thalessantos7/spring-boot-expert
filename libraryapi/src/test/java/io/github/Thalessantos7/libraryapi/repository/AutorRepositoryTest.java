@@ -3,6 +3,7 @@ package io.github.Thalessantos7.libraryapi.repository;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.model.GeneroLivro;
 import io.github.Thalessantos7.libraryapi.model.Livro;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -109,5 +110,17 @@ public class AutorRepositoryTest {
 
         repository.save(autor);
 //        livroRepository.saveAll(autor.getLivros());
+    }
+
+    @Test
+    void listarLivrosAutor() {
+        var id = UUID.fromString("981683da-ca8e-4d02-b471-9802acbf9f5e");
+        var autor = repository.findById(id).get();
+
+        // Buscar os livros do autor
+        List<Livro> livrosLista = livroRepository.findByAutor(autor);
+        autor.setLivros(livrosLista);
+
+        autor.getLivros().forEach(System.out::println);
     }
 }
