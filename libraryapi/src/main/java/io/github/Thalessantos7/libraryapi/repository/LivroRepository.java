@@ -3,11 +3,16 @@ package io.github.Thalessantos7.libraryapi.repository;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.model.Livro;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+/**
+ * @see LivroRepositoryTest
+ */
 
 public interface LivroRepository extends JpaRepository<Livro, UUID> {
     // Query Method
@@ -28,4 +33,30 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
 
     // SELECT * FROM livro WHERE data_publicacao between ? and ?
     List<Livro> findByDataPublicacaoBetween(LocalDate inicio, LocalDate fim);
+
+    // JPQL -> referencia as entidades e as propriedades
+    // SELECT l.* FROM livro AS l ORDER BY l.titulo, l.preco
+    @Query("SELECT l FROM Livro AS l ORDER BY l.titulo, l.preco")
+    List<Livro> listarTodosOrdenadoPorTituloAndPreco();
+
+    /**
+     * SELECT a.*
+     * FROM livro l
+     * JOIN autor a ON a.id = l.id_autor
+     */
+    @Query("SELECT a FROM Livro l JOIN l.autor a")
+    List<Autor> listarAutoresDosLivros();
+
+    // SELECT DISTINCT l.* FROM livro l
+    @Query("SELECT DISTINCT l.titulo FROM Livro l")
+    List<String> listarNomesDiferentesLivros();
+
+    @Query("""
+        SELECT l.genero
+        FROM Livro l
+        JOIN l.autor a
+        WHERE a.nacionalidade = 'Brasileira'
+        ORDER BY l.genero
+    """)
+    List<String> listarGenerosAutoresBrasileiros();
 }
