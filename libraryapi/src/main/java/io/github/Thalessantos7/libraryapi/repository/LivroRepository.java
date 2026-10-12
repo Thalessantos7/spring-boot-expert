@@ -5,6 +5,7 @@ import io.github.Thalessantos7.libraryapi.model.Livro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,5 +24,8 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
     List<Livro> findByTituloAndPreco(String titulo, BigDecimal preco);
 
     // SELECT * FROM livro WHERE titulo = ? OR isbn = ?
-    List<Livro> findByTituloOrIsbn(String titulo, String isbn);
+    List<Livro> findByTituloOrIsbnOrderByTitulo(String titulo, String isbn);
+
+    // SELECT * FROM livro WHERE data_publicacao between ? and ?
+    List<Livro> findByDataPublicacaoBetween(LocalDate inicio, LocalDate fim);
 }
