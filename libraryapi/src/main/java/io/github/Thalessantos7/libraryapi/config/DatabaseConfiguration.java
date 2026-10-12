@@ -41,7 +41,7 @@ public class DatabaseConfiguration {
 
         config.setJdbcUrl(url);
         config.setUsername(username);
-        config.setPassword("123456");
+        config.setPassword(password);
         config.setDriverClassName(driver);
 
         config.setMaximumPoolSize(10); // Máximo de conexões liberadas

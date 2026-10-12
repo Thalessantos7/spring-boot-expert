@@ -1,9 +1,11 @@
 package io.github.Thalessantos7.libraryapi.repository;
 
 import io.github.Thalessantos7.libraryapi.model.Autor;
+import io.github.Thalessantos7.libraryapi.model.GeneroLivro;
 import io.github.Thalessantos7.libraryapi.model.Livro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -59,4 +61,15 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
         ORDER BY l.genero
     """)
     List<String> listarGenerosAutoresBrasileiros();
+
+    // Named Parameters -> parâmetros nomeados
+    @Query("SELECT l FROM Livro l WHERE l.genero = :genero ORDER BY :paramOrdenacao")
+    List<Livro> findByGenero(
+            @Param("genero") GeneroLivro generoLivro,
+            @Param("paramOrdenacao") String nomePropriedade
+    );
+
+    // Positional Parameters
+    @Query("SELECT l FROM Livro l WHERE l.genero = ?2 ORDER BY ?1")
+    List<Livro> findByGeneroPositionalParameters(String nomePropriedade, GeneroLivro generoLivro);
 }
