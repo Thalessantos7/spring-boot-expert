@@ -3,7 +3,10 @@ package io.github.Thalessantos7.libraryapi.repository;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.model.GeneroLivro;
 import io.github.Thalessantos7.libraryapi.model.Livro;
+import jakarta.transaction.Transactional;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -72,4 +75,14 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
     // Positional Parameters
     @Query("SELECT l FROM Livro l WHERE l.genero = ?2 ORDER BY ?1")
     List<Livro> findByGeneroPositionalParameters(String nomePropriedade, GeneroLivro generoLivro);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Livro WHERE genero = ?1")
+    void deleteByGenero(GeneroLivro genero);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Livro SET dataPublicacao = ?1")
+    void updateDataPublicacao(LocalDate novaData);
 }
