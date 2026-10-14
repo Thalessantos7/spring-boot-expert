@@ -2,6 +2,7 @@ package io.github.Thalessantos7.libraryapi.controller;
 
 import io.github.Thalessantos7.libraryapi.controller.dto.AutorDTO;
 import io.github.Thalessantos7.libraryapi.controller.dto.ErroResposta;
+import io.github.Thalessantos7.libraryapi.exceptions.RegistroDuplicadoException;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.service.AutorService;
 import org.springframework.http.HttpStatus;
@@ -26,18 +27,24 @@ public class AutorController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvar(@RequestBody AutorDTO autor) {
-        var autorEntidade = autor.mapearParaAutor();
-        service.salvar(autorEntidade);
+    public ResponseEntity<Object> salvar(@RequestBody AutorDTO autor) {
+        try {
+            var autorEntidade = autor.mapearParaAutor();
+            service.salvar(autorEntidade);
 
-        // http://localhost:8080/autores/3879c3c1-0f53-45df-af5b-0532ac985f71
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(autorEntidade.getId())
-                .toUri();
+            // http://localhost:8080/autores/3879c3c1-0f53-45df-af5b-0532ac985f71
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(autorEntidade.getId())
+                    .toUri();
 
-        return ResponseEntity.created(location).build();
+            return ResponseEntity.created(location).build();
+        } catch (RegistroDuplicadoException e) {
+            var erroDTO = ErroResposta.conflito(e.getMessage());
+
+            return ResponseEntity.status(erroDTO.status()).body(erroDTO);
+        }
     }
 
     @GetMapping("{id}")
