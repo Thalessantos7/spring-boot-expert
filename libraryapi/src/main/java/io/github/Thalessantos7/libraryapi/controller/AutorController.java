@@ -1,6 +1,7 @@
 package io.github.Thalessantos7.libraryapi.controller;
 
 import io.github.Thalessantos7.libraryapi.controller.dto.AutorDTO;
+import io.github.Thalessantos7.libraryapi.controller.dto.ErroResposta;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.service.AutorService;
 import org.springframework.http.HttpStatus;
