@@ -1,7 +1,9 @@
 package io.github.Thalessantos7.libraryapi.service;
 
+import io.github.Thalessantos7.libraryapi.exceptions.OperacaoNaoPermitidaException;
 import io.github.Thalessantos7.libraryapi.model.Autor;
 import io.github.Thalessantos7.libraryapi.repository.AutorRepository;
+import io.github.Thalessantos7.libraryapi.repository.LivroRepository;
 import io.github.Thalessantos7.libraryapi.validator.AutorValidator;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,12 @@ import java.util.UUID;
 public class AutorService {
     private final AutorRepository repository;
     private final AutorValidator validator;
+    private final LivroRepository livroRepository;
 
-    public AutorService(AutorRepository repository, AutorValidator validator) {
+    public AutorService(AutorRepository repository, AutorValidator validator, LivroRepository livroRepository) {
         this.repository = repository;
         this.validator = validator;
+        this.livroRepository = livroRepository;
     }
 
     public Autor salvar(Autor autor) {
@@ -40,6 +44,10 @@ public class AutorService {
     }
 
     public void deletar(Autor autor) {
+        if (possuiLivro(autor)) throw new OperacaoNaoPermitidaException(
+                "Não é permitido excluir um Autor que possui livros cadastrados!"
+        );
+
         repository.delete(autor);
     }
 
@@ -57,5 +65,9 @@ public class AutorService {
         }
 
         return repository.findAll();
+    }
+
+    public boolean possuiLivro(Autor autor) {
+        return livroRepository.existsByAutor(autor);
     }
 }
